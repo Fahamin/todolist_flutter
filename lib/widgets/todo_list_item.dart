@@ -12,7 +12,7 @@ class TodoListItem extends StatelessWidget {
   final void Function() onTapDelete;
 
 
-  TodoListItem(this.model, this.onTapCheckBox, this.onTapDelete, {super.key});
+  TodoListItem({super.key, required this.model, required this.onTapCheckBox, required this.onTapDelete});
 
   @override
   Widget build(BuildContext context) {

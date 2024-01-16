@@ -1,4 +1,3 @@
-
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:todolist_flutter/model/todo_model.dart';
@@ -12,7 +11,6 @@ class SQLHelper {
   static final Title = "title";
   static final createdAt = "createdAt";
   static final isComplete = "isComplete";
-
 
   static Future<void> createTables(sql.Database database) async {
     String createTableQuery = "CREATE TABLE " +
@@ -28,11 +26,8 @@ class SQLHelper {
         " BIT " +
         ")";
 
-
     await database.execute(createTableQuery);
-
   }
-
 
   static Future<sql.Database> db() async {
     var databasesPath = await getDatabasesPath();
@@ -45,11 +40,14 @@ class SQLHelper {
     );
   }
 
-  static Future<int> insertTodo(
-      String title,  int fav) async {
+   Future<int> insertTodo(String title, int fav) async {
     final db = await SQLHelper.db();
 
-    final data = {Title: title, createdAt: DateTime.now().toString(),  isComplete: fav};
+    final data = {
+      Title: title,
+      createdAt: DateTime.now().toString(),
+      isComplete: fav
+    };
     final id = await db.insert(NAME_TABLE, data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
@@ -59,10 +57,10 @@ class SQLHelper {
 
   Future<List<TodoModel>> getAllTodo() async {
     final db = await SQLHelper.db();
-    final List<Map<String, dynamic>> maps = await db.query(NAME_TABLE, orderBy: "id");
+    final List<Map<String, dynamic>> maps =
+        await db.query(NAME_TABLE, orderBy: "id");
 
     return List<TodoModel>.from(maps.map((map) => TodoModel.fromMap(map)));
-
   }
 
   // Read a single item by id
@@ -73,7 +71,7 @@ class SQLHelper {
   }
 
   // Update an item by id
-  static Future<int> updateTodo(int id, String title, int fav) async {
+  Future<int> updateTodo(int id, String title, int fav) async {
     final db = await SQLHelper.db();
 
     final data = {
@@ -88,7 +86,7 @@ class SQLHelper {
   }
 
   // Delete
-  static Future<void> deleteTodo(int id) async {
+  Future<void> deleteTodo(int id) async {
     final db = await SQLHelper.db();
     try {
       await db.delete(NAME_TABLE, where: "id = ?", whereArgs: [id]);
@@ -96,5 +94,4 @@ class SQLHelper {
       print("Something went wrong when deleting an item: $err");
     }
   }
-
 }
