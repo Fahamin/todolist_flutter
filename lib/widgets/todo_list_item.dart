@@ -64,7 +64,7 @@ class TodoListItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        model.datetime,
+                        model.createdAt,
                         style: GoogleFonts.roboto(
                           color: const Color(0xff6C6868),
                           fontSize: 12,
