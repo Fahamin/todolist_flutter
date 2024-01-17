@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:todolist_flutter/screen/details_screen.dart';
 import 'package:todolist_flutter/screen/home_screen.dart';
 
 
@@ -7,7 +8,7 @@ class Routes {
 
   static String splashScreen = '/splashScreen';
 
-  static String m3uPage = '/m3uPage';
+  static String details = '/details';
 
   static String playlist = '/playlist';
 
@@ -35,5 +36,12 @@ appRoutes() => [
         transition: Transition.leftToRightWithFade,
         transitionDuration: Duration(milliseconds: 500),
       ),
+
+  GetPage(
+    name: Routes.details,
+    page: () => DetailsScreen(),
+    transition: Transition.leftToRightWithFade,
+    transitionDuration: Duration(milliseconds: 500),
+  ),
 
     ];

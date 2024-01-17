@@ -10,10 +10,10 @@ class TodoListItem extends StatelessWidget {
 
   TodoModel model;
   final void Function() onTapCheckBox;
-  final void Function() onTapDelete;
+  final void Function() onTapDetails;
 
 
-  TodoListItem({super.key, required this.model, required this.onTapCheckBox, required this.onTapDelete});
+  TodoListItem({super.key, required this.model, required this.onTapCheckBox, required this.onTapDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +81,13 @@ class TodoListItem extends StatelessWidget {
               ),
               CustomIconButton(
                 icon: const Icon(
-                  Icons.disabled_by_default_rounded,
+                  Icons.arrow_right_alt_outlined,
                   color: Colors.red,
                   size: 23,
                 ),
                 color: Colors.red.withOpacity(0.3),
                 // onTap: onTapDelete,
-                onTap: onTapDelete
+                onTap: onTapDetails
               ),
             ],
           ),

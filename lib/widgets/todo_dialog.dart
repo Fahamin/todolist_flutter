@@ -106,7 +106,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
           TextButton(
             onPressed: onPressedCreate,
             child: Text(
-              "Create",
+              "Add",
               style: GoogleFonts.roboto(
                 fontSize: 15.sp,
               ),
