@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../providers/providers.dart';
@@ -17,6 +18,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final textEditingController = TextEditingController();
+    ScreenUtil.init(context);
     final FocusNode focusNode = FocusNode();
 
     return BackdropFilter(
@@ -26,8 +28,8 @@ class CustomdialogNewTodo extends ConsumerWidget {
         title: Column(
           children: [
             Container(
-              height: 45,
-              width: 45,
+              height: 45.h,
+              width: 45.w,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -50,7 +52,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
               child: Text(
                 'New task',
                 style: GoogleFonts.roboto(
-                  fontSize: 23,
+                  fontSize: 23.sp,
                   color: const Color.fromARGB(255, 143, 128, 128),
                   fontWeight: FontWeight.bold,
                 ),
@@ -59,7 +61,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
           ],
         ),
         content: SizedBox(
-          height: 80,
+          height: 80.h,
           child: TextField(
             focusNode: focusNode,
             maxLines: null,
@@ -93,7 +95,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
             child: Text(
               "Cancel",
               style: GoogleFonts.roboto(
-                fontSize: 15,
+                fontSize: 15.sp,
                 color: Colors.red,
               ),
             ),
@@ -106,7 +108,7 @@ class CustomdialogNewTodo extends ConsumerWidget {
             child: Text(
               "Create",
               style: GoogleFonts.roboto(
-                fontSize: 15,
+                fontSize: 15.sp,
               ),
             ),
           ),

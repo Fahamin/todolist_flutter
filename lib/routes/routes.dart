@@ -3,7 +3,7 @@ import 'package:todolist_flutter/screen/home_screen.dart';
 
 
 class Routes {
-  static String homePage = '/homepage';
+  static String homeScreen = '/homeScreen';
 
   static String splashScreen = '/splashScreen';
 
@@ -30,7 +30,7 @@ appRoutes() => [
 
       // GetPage(name: Routes.splashScreen, page: () => SplashScreen()),
       GetPage(
-        name: Routes.homePage,
+        name: Routes.homeScreen,
         page: () => HomeScreen(),
         transition: Transition.leftToRightWithFade,
         transitionDuration: Duration(milliseconds: 500),

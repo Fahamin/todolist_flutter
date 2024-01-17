@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomIconButton extends StatelessWidget {
   final Icon icon;
@@ -14,6 +15,7 @@ class CustomIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(7),
       child: Material(
@@ -23,8 +25,8 @@ class CustomIconButton extends StatelessWidget {
           // onTap: () {},
           onTap: onTap,
           child: SizedBox(
-            height: 33,
-            width: 33,
+            height: 33.h,
+            width: 33.w,
             child: icon,
           ),
         ),
