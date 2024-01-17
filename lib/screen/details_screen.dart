@@ -41,55 +41,67 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     var db = ref.watch(databaseProvider);
+    var fireDb = ref.watch(fireProvider);
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: _createDateController,
-              ),
-              TextField(
-                decoration: InputDecoration(),
-                maxLines: 4,
-                controller: _titleController,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      db.updateTodo(
-                          model.id, _titleController.text, model.isComplete);
-                      ref.refresh(getAllTodoProvider);
-                      Get.back();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Update"),
+    return Flexible(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+              "TodoList"
+          ),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextField(
+                  controller: _createDateController,
+                ),
+                TextField(
+                  decoration: InputDecoration(),
+                  maxLines: 4,
+                  controller: _titleController,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        fireDb.updateTodo(
+                            model.id, _titleController.text, model.isComplete);
+                        /*db.updateTodo(
+                            model.id, _titleController.text, model.isComplete);*/
+                        ref.refresh(firestoreProvider);
+                        Get.back();
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Update"),
+                      ),
                     ),
-                  ),
-                  Gap(20.w),
-                  ElevatedButton(
-                    onPressed: () {
-                      db.deleteTodo(model.id);
-                      ref.refresh(getAllTodoProvider);
+                    Gap(10.w),
+                    ElevatedButton(
+                      onPressed: () {
+                       // db.deleteTodo(model.id);
+                        fireDb.deletTodo(model.id);
+                        ref.refresh(firestoreProvider);
 
-                      Get.back();
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Delete"),
+                        Get.back();
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Delete"),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

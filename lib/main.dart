@@ -36,7 +36,7 @@ class MyApp extends ConsumerWidget {
             debugShowCheckedModeBanner: false,
             title: 'IPTV',
             theme: isLightTheme ? ThemeData.light() : ThemeData.dark(),
-            initialRoute: Routes.homeScreen,
+            initialRoute: Routes.splashScreen,
             getPages: appRoutes()));
   }
 }
