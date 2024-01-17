@@ -16,8 +16,8 @@ class FireStoreDb {
           TodoModel(docRef.id, title, DateTime.now().toString(), isComplete);
 
       await docRef.set(model.toJson()).then(
-          (value) => debugPrint("Appointment booked successfully!"),
-          onError: (e) => debugPrint("Error booking appointment: $e"));
+          (value) => debugPrint(" successfully!"),
+          onError: (e) => debugPrint("Error : $e"));
       return true;
     } catch (e) {
       return Future.error(e);
@@ -55,6 +55,6 @@ class FireStoreDb {
       snapshot.docs.forEach((doc) {
         print('${doc.id} => ${doc.data()}');
       });
-    }).catchError((error) => print("Failed to fetch users: $error"));
+    }).catchError((error) => print("Failed to fetch : $error"));
   }
 }
