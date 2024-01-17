@@ -41,6 +41,7 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     var db = ref.watch(databaseProvider);
+    var fireDb = ref.watch(fireProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -64,9 +65,11 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      db.updateTodo(
+                      fireDb.updateTodo(
                           model.id, _titleController.text, model.isComplete);
-                      ref.refresh(getAllTodoProvider);
+                      /*db.updateTodo(
+                          model.id, _titleController.text, model.isComplete);*/
+                      ref.refresh(firestoreProvider);
                       Get.back();
                     },
                     child: const Padding(
@@ -77,8 +80,9 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
                   Gap(20.w),
                   ElevatedButton(
                     onPressed: () {
-                      db.deleteTodo(model.id);
-                      ref.refresh(getAllTodoProvider);
+                     // db.deleteTodo(model.id);
+                      fireDb.deletTodo(model.id);
+                      ref.refresh(firestoreProvider);
 
                       Get.back();
                     },

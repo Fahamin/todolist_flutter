@@ -21,6 +21,13 @@ class TodoModel {
     );
   }
 
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['createdAt'] = this.createdAt;
+    data['isComplete'] = this.isComplete;
+    return data;
+  }
 
 }

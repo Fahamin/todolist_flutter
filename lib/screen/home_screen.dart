@@ -22,9 +22,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
-
-    var todos = ref.watch(getAllTodoProvider);
+    var todos = ref.watch(firestoreProvider);
+    //var todos = ref.watch(getAllTodoProvider);
     var db = ref.watch(databaseProvider);
+    var fireDb = ref.watch(fireProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,15 +45,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: todos.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final todo = todos.elementAt(index);
-                    var model = TodoModel(todo["id"], todo["title"],
-                        todo["createdAt"], todo["isComplete"]);
+                    final model = todos.elementAt(index);
+                    //for sqlite
+                    /*var model = TodoModel(todo["id"], todo["title"],
+                        todo["createdAt"], todo["isComplete"]);*/
                     return TodoListItem(
                       model: model,
-                      onTapCheckBox: () {
-                        db.updateTodo(
-                            model.id, model.title!, model.isComplete == 1 ? 0 : 1);
-                        ref.refresh(getAllTodoProvider);
+                      onTapCheckBox: () async {
+                         fireDb.updateTodo(model.id, model.title!,
+                            model.isComplete == 1 ? 0 : 1);
+
+                       /* db.updateTodo(model.id, model.title!,
+                            model.isComplete == 1 ? 0 : 1);*/
+                      await  ref.refresh(firestoreProvider);
                       },
                       onTapDetails: () async {
                         Get.toNamed(Routes.details, arguments: model);
@@ -81,9 +86,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 onPressedCreate: () async {
                   final tile = ref.read(titleTodoProvider);
                   if (tile.isNotEmpty) {
-                    await db.insertTodo(tile, 0);
-                    ref.refresh(getAllTodoProvider);
+                    // await db.insertTodo(tile, 0);
+                    //ref.refresh(getAllTodoProvider);
 
+                    fireDb.addNewTodo(tile, 0);
+                    ref.refresh(firestoreProvider);
                     Get.back();
                   }
                 },
