@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:todolist_flutter/model/todo_model.dart';
@@ -40,7 +41,7 @@ class SQLHelper {
     );
   }
 
-   Future<int> insertTodo(String title, int fav) async {
+  Future<int> insertTodo(String title, int fav) async {
     final db = await SQLHelper.db();
 
     final data = {
@@ -53,14 +54,11 @@ class SQLHelper {
     return id;
   }
 
-  List<TodoModel> channelList = [];
-
-  Future<List<TodoModel>> getAllTodo() async {
+  Future<List<Map<String, dynamic>>> getAllTodo() async {
     final db = await SQLHelper.db();
-    final List<Map<String, dynamic>> maps =
-        await db.query(NAME_TABLE, orderBy: "id");
-
-    return List<TodoModel>.from(maps.map((map) => TodoModel.fromMap(map)));
+    return await db.query(NAME_TABLE, orderBy: "id");
+    //debugPrint("fahamin" + maps.toString());
+    //return List<TodoModel>.from(maps.map((map) => TodoModel.fromMap(map)));
   }
 
   // Read a single item by id

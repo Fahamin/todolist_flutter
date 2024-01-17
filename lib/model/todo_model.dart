@@ -1,8 +1,8 @@
 class TodoModel {
-  int id;
-  String title;
-  String createdAt;
-  bool isComplete = false;
+  var id;
+  String? title;
+  String? createdAt;
+  var isComplete = 0;
 
   TodoModel(
     this.id,
@@ -22,12 +22,5 @@ class TodoModel {
   }
 
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'description': createdAt,
-      'isComplete': isComplete ? 1 : 0,
-    };
-  }
+
 }

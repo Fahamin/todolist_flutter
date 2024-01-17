@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todolist_flutter/model/todo_model.dart';
 
@@ -9,17 +10,18 @@ class TodoListItem extends StatelessWidget {
 
   TodoModel model;
   final void Function() onTapCheckBox;
-  final void Function() onTapDelete;
+  final void Function() onTapDetails;
 
 
-  TodoListItem({super.key, required this.model, required this.onTapCheckBox, required this.onTapDelete});
+  TodoListItem({super.key, required this.model, required this.onTapCheckBox, required this.onTapDetails});
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
       child: Container(
-        height: 70,
+        height: 70.h,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -38,14 +40,14 @@ class TodoListItem extends StatelessWidget {
             children: [
             IconButton(
                 icon: Icon(
-                  (model.isComplete)
+                  (model.isComplete==1)
                       ? Icons.check_box_rounded
                       : Icons.check_box_outline_blank_rounded,
                   color: Colors.blue,
-                  size: 23,
+                  size: 23.sp,
                 ),
                 color: Colors.blue.withOpacity(0.3),
-                 onPressed: () { onTapCheckBox; },
+                 onPressed: onTapCheckBox
               ),
               Expanded(
                 child: Padding(
@@ -53,24 +55,24 @@ class TodoListItem extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        model.title,
+                        model.title!,
                         style: GoogleFonts.roboto(
                           color: const Color(0xff6C6868),
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.w500,
-                          decoration: model.isComplete ? TextDecoration.lineThrough : null,
-                          decorationThickness: model.isComplete ? 2.0 : null,
-                          decorationColor: model.isComplete ? Colors.blue : null,
+                          decoration: model.isComplete==1 ? TextDecoration.lineThrough : null,
+                          decorationThickness: model.isComplete==1 ? 2.0 : null,
+                          decorationColor: model.isComplete==1 ? Colors.blue : null,
                         ),
                       ),
                       Text(
-                        model.createdAt,
+                        model.createdAt!,
                         style: GoogleFonts.roboto(
                           color: const Color(0xff6C6868),
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
-                          decorationThickness: model.isComplete ? 2.0 : null,
-                          decorationColor: model.isComplete ? Colors.blue : null,
+                          decorationThickness: model.isComplete==1 ? 2.0 : null,
+                          decorationColor: model.isComplete==1 ? Colors.blue : null,
                         ),
                       ),
                     ],
@@ -79,15 +81,13 @@ class TodoListItem extends StatelessWidget {
               ),
               CustomIconButton(
                 icon: const Icon(
-                  Icons.disabled_by_default_rounded,
+                  Icons.arrow_right_alt_outlined,
                   color: Colors.red,
                   size: 23,
                 ),
                 color: Colors.red.withOpacity(0.3),
                 // onTap: onTapDelete,
-                onTap: () {
-
-                },
+                onTap: onTapDetails
               ),
             ],
           ),
