@@ -40,7 +40,9 @@ class OnBoardingScreen extends StatelessWidget {
       totalPage: 3,
       headerBackgroundColor: Colors.white,
       pageBackgroundColor: Colors.white,
+      centerBackground: true,
       background: [
+
         Image.asset(
           'assets/images/a.jpg',
           height: 300.h,

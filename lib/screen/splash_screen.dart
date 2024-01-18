@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (_seen) {
       Get.offNamed(Routes.homeScreen);
     } else {
-     // await prefs.setBool('seen', true);
+      await prefs.setBool('seen', true);
       Get.offNamed(Routes.onboardPage);
     }
   }
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Center(
 
-              child: Text("Todo APP Flutter"),
+              child: CircularProgressIndicator(),
             ),
             Gap(10.h),
             Center(
